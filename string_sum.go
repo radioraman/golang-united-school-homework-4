@@ -2,14 +2,17 @@ package string_sum
 
 import (
 	"errors"
+	"fmt"
+	"strconv"
+	"strings"
 )
 
 //use these errors as appropriate, wrapping them with fmt.Errorf function
 var (
-	// Use when the input is empty, and input is considered empty if the string contains only whitespace
-	errorEmptyInput = errors.New("input is empty")
-	// Use when the expression has number of operands not equal to two
-	errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
+// Use when the input is empty, and input is considered empty if the string contains only whitespace
+//errorEmptyInput = errors.New("input is empty")
+// Use when the expression has number of operands not equal to two
+//errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
 )
 
 // Implement a function that computes the sum of two int numbers written as a string
@@ -23,5 +26,34 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 func StringSum(input string) (output string, err error) {
-	return "", nil
+	input = strings.TrimSpace(input)
+	input = strings.ReplaceAll(input, " ", "")
+	var (
+		s                   []string
+		errorEmptyInput     error
+		errorNotTwoOperands error
+	)
+	switch len(input) {
+	case 0:
+		errorEmptyInput = errors.New("input is empty")
+		return `""`, fmt.Errorf("%w", errorEmptyInput)
+	case 3:
+		s = strings.SplitAfter(input, string(input[0]))
+	case 4:
+		s = strings.SplitAfter(input, string(input[1]))
+	default:
+		errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
+		return `""`, fmt.Errorf("%w", errorNotTwoOperands)
+	}
+	s1 := s[0]
+	s2 := s[1]
+	t1, e1 := strconv.Atoi(s1)
+	if e1 != nil {
+		return `The "input" is not a number`, fmt.Errorf("%w", e1)
+	}
+	t2, e2 := strconv.Atoi(s2)
+	if e2 != nil {
+		return `The "input" is not a number`, fmt.Errorf("%w", e2)
+	}
+	return strconv.Itoa(t1 + t2), nil
 }
