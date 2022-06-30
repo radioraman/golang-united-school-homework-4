@@ -9,10 +9,10 @@ import (
 
 //use these errors as appropriate, wrapping them with fmt.Errorf function
 var (
-// Use when the input is empty, and input is considered empty if the string contains only whitespace
-//errorEmptyInput = errors.New("input is empty")
-// Use when the expression has number of operands not equal to two
-//errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
+	// Use when the input is empty, and input is considered empty if the string contains only whitespace
+	errorEmptyInput = errors.New("input is empty")
+	// Use when the expression has number of operands not equal to two
+	errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
 )
 
 // Implement a function that computes the sum of two int numbers written as a string
@@ -29,9 +29,7 @@ func StringSum(input string) (output string, err error) {
 	input = strings.TrimSpace(input)
 	input = strings.ReplaceAll(input, " ", "")
 	var (
-		s                   []string
-		errorEmptyInput     = errors.New("input is empty")
-		errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
+		s []string
 	)
 	switch len(input) {
 	case 0:
