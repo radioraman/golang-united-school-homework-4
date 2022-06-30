@@ -38,6 +38,10 @@ func StringSum(input string) (output string, err error) {
 		s = strings.SplitAfter(input, string(input[0]))
 	case 4:
 		s = strings.SplitAfter(input, string(input[1]))
+	case 5:
+		s = strings.SplitAfter(input, string(input[1]))
+	case 6:
+		s = strings.SplitAfter(input, string(input[2]))
 	default:
 		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
