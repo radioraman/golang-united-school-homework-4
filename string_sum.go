@@ -33,13 +33,13 @@ func StringSum(input string) (output string, err error) {
 	)
 	switch len(input) {
 	case 0:
-		return `""`, fmt.Errorf("%w", errorEmptyInput)
+		return "", fmt.Errorf("%w", errorEmptyInput)
 	case 3:
 		s = strings.SplitAfter(input, string(input[0]))
 	case 4:
 		s = strings.SplitAfter(input, string(input[1]))
 	default:
-		return `""`, fmt.Errorf("%w", errorNotTwoOperands)
+		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
 	s1 := s[0]
 	s2 := s[1]
