@@ -30,19 +30,17 @@ func StringSum(input string) (output string, err error) {
 	input = strings.ReplaceAll(input, " ", "")
 	var (
 		s                   []string
-		errorEmptyInput     error
-		errorNotTwoOperands error
+		errorEmptyInput     = errors.New("input is empty")
+		errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
 	)
 	switch len(input) {
 	case 0:
-		errorEmptyInput = errors.New("input is empty")
 		return `""`, fmt.Errorf("%w", errorEmptyInput)
 	case 3:
 		s = strings.SplitAfter(input, string(input[0]))
 	case 4:
 		s = strings.SplitAfter(input, string(input[1]))
 	default:
-		errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
 		return `""`, fmt.Errorf("%w", errorNotTwoOperands)
 	}
 	s1 := s[0]
