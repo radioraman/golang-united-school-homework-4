@@ -27,7 +27,8 @@ var (
 
 func StringSum(input string) (output string, err error) {
 	input = strings.TrimSpace(input)
-	input = strings.ReplaceAll(input, " ", "")
+	replacer := strings.NewReplacer(" ", "", "\t", "", "\n", "", "\f", "", "\r", "", "\v", "")
+	input = replacer.Replace(input)
 	var (
 		s []string
 	)
@@ -49,11 +50,11 @@ func StringSum(input string) (output string, err error) {
 	s2 := s[1]
 	t1, e1 := strconv.Atoi(s1)
 	if e1 != nil {
-		return `The "input" is not a number`, fmt.Errorf("%w", e1)
+		return "", fmt.Errorf("%w", e1)
 	}
 	t2, e2 := strconv.Atoi(s2)
 	if e2 != nil {
-		return `The "input" is not a number`, fmt.Errorf("%w", e2)
+		return "", fmt.Errorf("%w", e2)
 	}
 	return strconv.Itoa(t1 + t2), nil
 }
